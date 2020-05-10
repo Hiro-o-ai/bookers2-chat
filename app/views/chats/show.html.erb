@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-9">
+      <h3>Chat Room</h3>
+
+      <h4>参加者</h4>
+      <p><%= @user.name %>さんと<%= current_user.name %>さんのチャット</p>
+
+      <h3>Chat room</h3>
+      
+      <%= form_with model: @chat, data: {remote: true} do |f| %>
+        <%= f.text_field :message %>
+        <%= f.hidden_field :room_id %>
+      <% end %>
+
+      <div class="message" style="width: 400px;">
+        <% @chats.each do |chat| %>
+          <% if chat.user_id == current_user.id %>
+            <p style="text-align: right;"><%= chat.message %></p>
+          <% else %>
+            <p style="text-align: left;"><%= chat.message %></p>
+          <% end %>
+        <% end %>
+      </div>
+
+        <!--   <form>
+        <label>Say something:</label><br>
+        <input type="text" id="chat-input" data-behavior="room_speaker">
+        <div id="direct_messages" data-room_id="<%= @room.id %>">
+        </form> -->
+        <%#= render @direct_messages %>
+    </div>
+  </div>
+</div>
